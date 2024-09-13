@@ -22,18 +22,22 @@ class ImageTile extends GetView<ImageController> {
       elevation: 0.8,
       child: LayoutBuilder(
         builder: (context, constraints) {
+
           int columns = constraints.maxWidth > 1200
               ? 4
               : constraints.maxWidth > 800
-                  ? 3
-                  : 2;
+              ? 3
+              : 2;
+          double imageWidth = constraints.maxWidth;
+          double imageHeight = imageWidth * 0.75;
 
           return GestureDetector(
             onTap: () => Get.to(() => ImageDetailsScreen(image: image)),
             child: Column(
               children: [
                 SizedBox(
-                  width: context.screenWidth / columns,
+                  height: imageHeight,
+                  width: imageWidth,
                   child: Hero(
                     tag: image.id,
                     child: ClipRRect(
@@ -45,13 +49,13 @@ class ImageTile extends GetView<ImageController> {
                         imageUrl: image.url,
                         fit: BoxFit.cover,
                         progressIndicatorBuilder: (
-                          final context,
-                          final widget,
-                          final event,
-                        ) {
+                            final context,
+                            final widget,
+                            final event,
+                            ) {
                           return CustomShimmerWidget(
-                            height: 200,
-                            width: context.screenWidth / columns,
+                            height: imageHeight,
+                            width: imageWidth,
                             radius: 0,
                           );
                         },
@@ -77,7 +81,7 @@ class ImageTile extends GetView<ImageController> {
                     vertical: 2,
                   ),
                   child: Obx(
-                    () => Row(
+                        () => Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
@@ -87,20 +91,19 @@ class ImageTile extends GetView<ImageController> {
                                 controller.toggleLike(image.id);
                               },
                               child: Icon(
-                                controller.getImageById(image.id)?.isLiked.value??false
+                                controller.getImageById(image.id)?.isLiked.value ?? false
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: controller
-                                        .getImageById(image.id)
-                                        ?.isLiked
-                                        .value??false
+                                color: controller.getImageById(image.id)?.isLiked.value ?? false
                                     ? Colors.red
                                     : Colors.black,
                               ),
                             ),
+                            const SizedBox(width: 8),
                             FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(image.likes.value.formatCount)),
+                              fit: BoxFit.cover,
+                              child: Text(image.likes.value.formatCount),
+                            ),
                           ],
                         ),
                         Row(
@@ -124,3 +127,5 @@ class ImageTile extends GetView<ImageController> {
     );
   }
 }
+
+
