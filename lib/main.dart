@@ -3,7 +3,7 @@ import 'package:gapopa/features/image_gallery/views/screens/index.dart';
 import 'package:get/get.dart';
 import 'features/image_gallery/controllers/index.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 

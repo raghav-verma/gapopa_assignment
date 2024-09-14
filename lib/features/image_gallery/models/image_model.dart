@@ -1,33 +1,5 @@
 import 'package:get/get.dart';
 
-// class ImageModel {
-//   final String id;
-//   final String url;
-//   final Strng
-//   final int views;
-//   RxBool isLiked;
-//
-//   ImageModel({
-//     required this.id,
-//     required this.url,
-//     required int likes,
-//     required this.views,
-//     bool isLiked = false,
-//   })  : this.likes = likes.obs,
-//         this.isLiked = isLiked.obs;
-//
-//   factory ImageModel.fromJson(Map<String, dynamic> json) {
-//     return ImageModel(
-//       id: json['id'].toString(),
-//       url: json['webformatURL'],
-//       likes: json['likes'],
-//       views: json['views'],
-//     );
-//   }
-// }
-
-import 'package:get/get.dart';
-
 class ImageModel {
   final String id;
   final String url;
