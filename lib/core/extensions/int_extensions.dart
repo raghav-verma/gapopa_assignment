@@ -1,13 +1,27 @@
-import 'package:intl/intl.dart';
+name: Deploy Flutter Web to GitHub Pages
 
-extension IntExtensions on int {
-  String get formatCount {
-    if (this >= 1000000) {
-      return NumberFormat.compact().format(this);
-    } else if (this >= 1000) {
-      return NumberFormat.compact().format(this);
-    } else {
-      return NumberFormat("#,###").format(this);
-    }
-  }
-}
+on:
+push:
+branches:
+- main  # The workflow will trigger on a push to the 'main' branch
+
+jobs:
+build:
+runs-on: ubuntu-latest
+
+steps:
+- name: Checkout the repository
+uses: actions/checkout@v2
+
+- name: Set up Flutter
+uses: subosito/flutter-action@v2
+with:
+flutter-version: 'stable'
+
+- name: Install dependencies
+run: flutter pub get
+
+- name: Build Flutter Web
+run: flutter build web
+
+- name: Deploy to GitH
